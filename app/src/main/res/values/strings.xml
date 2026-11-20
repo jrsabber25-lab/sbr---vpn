@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">SBR VPN</string>
+
+    <!-- Status & Connection -->
+    <string name="status_connected">Connected</string>
+    <string name="status_connecting">Connecting…</string>
+    <string name="status_reconnecting">Reconnecting…</string>
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_error">Connection Error</string>
+    <string name="action_connect">Connect</string>
+    <string name="action_disconnect">Disconnect</string>
+    <string name="action_reconnect">Reconnect</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_servers">Servers</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Notifications -->
+    <string name="vpn_notification_channel_name">SBR VPN Tunnel</string>
+    <string name="vpn_notification_channel_desc">Persistent status notification while your encrypted WireGuard tunnel is active.</string>
+    <string name="vpn_notification_title_connected">SBR VPN Active</string>
+    <string name="vpn_notification_title_reconnecting">SBR VPN Reconnecting</string>
+    <string name="vpn_notification_killswitch_guard">Network interrupted — Kill Switch blocking unsecured fallback</string>
+
+    <!-- Errors -->
+    <string name="error_no_backend_configured">Backend API endpoint is not configured yet. Set your deployed SBR VPN API URL in Settings to load active servers.</string>
+    <string name="error_vpn_permission_denied">VPN permission was denied. SBR VPN requires Android VPN permission to establish a WireGuard tunnel.</string>
+    <string name="error_no_server_selected">Select a deployed server first before connecting.</string>
+</resources>

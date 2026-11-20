@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SBR VPN — Secure Admin Control Plane</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="login-view" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-row">
+        <span class="brand-badge">SBR</span>
+        <div>
+          <h1>SBR VPN Admin</h1>
+          <p class="muted">Role-Based Infrastructure Control Plane</p>
+        </div>
+      </div>
+      <form id="login-form">
+        <label>Backend HTTPS API URL
+          <input id="api-url" type="url" placeholder="https://api.sbrvpn.example.com" required />
+        </label>
+        <label>Administrator Email
+          <input id="admin-email" type="email" placeholder="admin@sbrvpn.example.com" required />
+        </label>
+        <label>Password
+          <input id="admin-password" type="password" required />
+        </label>
+        <button type="submit" class="btn-primary">Sign In with RBAC</button>
+        <p id="login-error" class="error-text"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="dashboard-view" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="brand-row">
+        <span class="brand-badge">SBR</span>
+        <div>
+          <h2>SBR VPN</h2>
+          <span class="muted">Admin RBAC</span>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-tab="servers">VPN Servers</button>
+        <button class="nav-btn" data-tab="sessions">Active Sessions</button>
+        <button class="nav-btn" data-tab="users">Users &amp; Plans</button>
+        <button class="nav-btn" data-tab="errors">System Errors</button>
+      </nav>
+      <button id="logout-btn" class="btn-outline">Sign Out</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="kpi-grid">
+        <div class="kpi-card"><span>Online Servers</span><strong id="kpi-online">0 / 0</strong></div>
+        <div class="kpi-card"><span>Active Sessions</span><strong id="kpi-sessions">0</strong></div>
+        <div class="kpi-card"><span>Total Users</span><strong id="kpi-users">0</strong></div>
+        <div class="kpi-card"><span>Total Bandwidth</span><strong id="kpi-bandwidth">0 B</strong></div>
+      </header>
+
+      <section id="tab-servers" class="tab-panel">
+        <div class="panel-header">
+          <h3>Deployed WireGuard Nodes</h3>
+          <button id="refresh-all-btn" class="btn-outline">Refresh Telemetry</button>
+        </div>
+        <form id="add-server-form" class="add-grid">
+          <select id="srv-region" required>
+            <option value="US|United States">United States (US)</option>
+            <option value="GB|United Kingdom">United Kingdom (GB)</option>
+            <option value="DE|Germany">Germany (DE)</option>
+            <option value="NL|Netherlands">Netherlands (NL)</option>
+            <option value="FR|France">France (FR)</option>
+            <option value="SG|Singapore">Singapore (SG)</option>
+            <option value="JP|Japan">Japan (JP)</option>
+            <option value="CA|Canada">Canada (CA)</option>
+            <option value="IN|India">India (IN)</option>
+          </select>
+          <input id="srv-city" placeholder="City (e.g. Frankfurt)" required />
+          <input id="srv-host" placeholder="Hostname / IP" required />
+          <input id="srv-port" type="number" value="51820" required />
+          <input id="srv-agent" type="url" placeholder="Node Agent URL (https://...)" required />
+          <input id="srv-pubkey" placeholder="Server WG Public Key (Base64)" required />
+          <select id="srv-tier">
+            <option value="free">Free Tier</option>
+            <option value="premium">Premium Tier</option>
+          </select>
+          <button type="submit" class="btn-primary">Add VPN Server</button>
+        </form>
+        <table>
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Endpoint</th>
+              <th>Tier</th>
+              <th>Status</th>
+              <th>CPU / RAM</th>
+              <th>Uptime</th>
+              <th>Bandwidth</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="servers-tbody"></tbody>
+        </table>
+      </section>
+
+      <section id="tab-sessions" class="tab-panel hidden">
+        <h3>Active WireGuard Sessions</h3>
+        <table>
+          <thead>
+            <tr><th>Session ID</th><th>User ID</th><th>Server ID</th><th>Tunnel IP</th><th>Protocol</th><th>Started</th></tr>
+          </thead>
+          <tbody id="sessions-tbody"></tbody>
+        </table>
+      </section>
+
+      <section id="tab-users" class="tab-panel hidden">
+        <h3>Users &amp; Subscription Management</h3>
+        <table>
+          <thead>
+            <tr><th>Display Name</th><th>Email</th><th>Plan</th><th>Max Devices</th><th>Role</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </section>
+
+      <section id="tab-errors" class="tab-panel hidden">
+        <h3>System Error Logs</h3>
+        <table>
+          <thead>
+            <tr><th>Time</th><th>Component</th><th>Severity</th><th>Message</th></tr>
+          </thead>
+          <tbody id="errors-tbody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

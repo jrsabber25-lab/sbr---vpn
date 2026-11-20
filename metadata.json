@@ -1,0 +1,6 @@
+{
+  "name": "SBR VPN",
+  "description": "Secure WireGuard VPN client with real-time tunnel telemetry, global server selection, kill switch, and account management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
